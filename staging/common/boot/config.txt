@@ -1,0 +1,3 @@
+dtoverlay=pi3-disable-bt
+dtoverlay=dwc2,dr_mode=peripheral
+enable_uart=1

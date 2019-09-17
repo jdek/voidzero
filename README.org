@@ -1,0 +1,76 @@
+#+BEGIN_EXAMPLE
+  __               _      _ __   _____ 
+ / /              (_)    | |\ \ |  _  |
+| | __   __  ___   _   __| | | || |/' |
+| | \ \ / / / _ \ | | / _` | | ||  /| |
+| |  \ V / | (_) || || (_| | | |\ |_/ /
+| |   \_/   \___/ |_| \__,_| | | \___/ 
+ \_\                        /_/
+#+END_EXAMPLE
+
+* voidzero
+
+Utility to get a Raspberry Pi Zero running on Void Linux with the
+basics setup in just over 5 minutes.
+
+** Quick start
+
+   Plug in your sdcard device (let's assume it's ~/dev/sdd~).
+
+   #+BEGIN_SRC shell
+./flash.sh /dev/sdd
+./mount.sh /dev/sdd
+./stage.sh
+./install.sh
+sync
+umount -R /dev/sdd
+   #+END_SRC
+
+   Then plug into your Raspberry Pi Zero device and enjoy!
+
+** ~flash.sh~ and ~~mount.sh~
+
+   Both take a device argument i.e. ~./flash.sh /dev/sdd~. Note that
+   ~flash.sh~ won't work if your devices are numbered ~mmcblk0p1~ etc
+   as it just adds a ~2~ to the end of the input argument to pass to
+   the resize tools. It's relatively easy to just fix this in the
+   script.
+
+** ~stage.sh~
+
+   The staging script runs off environment variables for Wi-Fi and USB
+   gadget networking.
+
+*** Wi-Fi networking
+
+    #+BEGIN_SRC shell
+WPA_SSID=MySSID
+WPA_PSK=MyPSK
+    #+END_SRC
+
+*** USB networking
+
+    #+BEGIN_SRC shell
+DEVICE_SUBNET=192.168.1
+DEVICE_CIDR=24
+DEVICE_ID=254
+    #+END_SRC
+
+    This will result in a ~192.168.1.245/24~ address for the usb0
+    interface with a default gateway of ~192.168.1.1~.
+
+** ~install.sh~
+
+   Installs onto ~./mmc~. Does a bunch of things, just check the
+   script if you want to know more, it's not very complex.
+
+** Dependencies
+
+   - ~wpa_passphrase~
+   - ~ssh-keygen~
+   - ~install~
+   - ~pv~
+   - ~dd~
+   - ~sfdisk~
+   - ~e2fsck~
+   - ~resize2fs~
