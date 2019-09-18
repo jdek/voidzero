@@ -28,7 +28,7 @@ umount -R /dev/sdd
 
    Then plug into your Raspberry Pi Zero device and enjoy!
 
-** ~flash.sh~ and ~~mount.sh~
+** ~flash.sh~ and ~mount.sh~
 
    Both take a device argument i.e. ~./flash.sh /dev/sdd~. Note that
    ~flash.sh~ won't work if your devices are numbered ~mmcblk0p1~ etc
@@ -42,6 +42,9 @@ umount -R /dev/sdd
    gadget networking. It also copies your ssh .pub key into the
    staging/priv/root/.ssh/authorized_keys file (touch or manually fill
    this file if you want a different key).
+
+   You should ~rm -rf staging/priv/etc/ssh~ and re-run this script if
+   you want to regenerate rpi0 sshd host keys.
 
 *** Wi-Fi networking
 
