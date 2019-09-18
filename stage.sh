@@ -1,14 +1,17 @@
 #!/bin/sh
-STAGING=staging/priv
+STAGE_PRIV=staging/priv
 
-mkdir -p "$STAGING/etc/ssh"
-[ ! -f "$STAGING/etc/ssh/ssh_host_dsa_key" ] && ssh-keygen -q -N "" -t dsa -f "$STAGING/etc/ssh/ssh_host_dsa_key"
-[ ! -f "$STAGING/etc/ssh/ssh_host_ecdsa_key" ] && ssh-keygen -q -N "" -t ecdsa -f "$STAGING/etc/ssh/ssh_host_ecdsa_key"
-[ ! -f "$STAGING/etc/ssh/ssh_host_rsa_key" ] && ssh-keygen -q -N "" -t rsa -f "$STAGING/etc/ssh/ssh_host_rsa_key"
-[ ! -f "$STAGING/etc/ssh/ssh_host_ed25519_key" ] && ssh-keygen -q -N "" -t ed25519 -f "$STAGING/etc/ssh/ssh_host_ed25519_key"
+mkdir -p "$STAGE_PRIV/etc/ssh"
+[ ! -f "$STAGE_PRIV/etc/ssh/ssh_host_dsa_key" ] && ssh-keygen -q -N "" -t dsa -f "$STAGE_PRIV/etc/ssh/ssh_host_dsa_key"
+[ ! -f "$STAGE_PRIV/etc/ssh/ssh_host_ecdsa_key" ] && ssh-keygen -q -N "" -t ecdsa -f "$STAGE_PRIV/etc/ssh/ssh_host_ecdsa_key"
+[ ! -f "$STAGE_PRIV/etc/ssh/ssh_host_rsa_key" ] && ssh-keygen -q -N "" -t rsa -f "$STAGE_PRIV/etc/ssh/ssh_host_rsa_key"
+[ ! -f "$STAGE_PRIV/etc/ssh/ssh_host_ed25519_key" ] && ssh-keygen -q -N "" -t ed25519 -f "$STAGE_PRIV/etc/ssh/ssh_host_ed25519_key"
 
-mkdir -p "$STAGING/etc/wpa_supplicant"
-[ ! -z "$WPA_SSID" ] && [ ! -z "$WPA_PSK" ] && cat << EOF > "$STAGING/etc/wpa_supplicant/wpa_supplicant.conf"
+mkdir -p "$STAGE_PRIV/root/.ssh"
+[ ! -f "$STAGE_PRIV/root/.ssh/authorized_keys" ] && cat $HOME/.id_*.pub > "$STAGE_PRIV/root/.ssh/authorized_keys"
+
+mkdir -p "$STAGE_PRIV/etc/wpa_supplicant"
+[ ! -z "$WPA_SSID" ] && [ ! -z "$WPA_PSK" ] && cat << EOF > "$STAGE_PRIV/etc/wpa_supplicant/wpa_supplicant.conf"
 # See wpa_supplicant.conf(5) for details
 
 ctrl_interface=/run/wpa_supplicant
@@ -24,7 +27,7 @@ EOF
 DEVICE_SUBNET=${DEVICE_SUBNET:-192.168.1}
 DEVICE_CIDR=${DEVICE_CIDR:-24}
 DEVICE_ID=${DEVICE_ID:-254}
-cat <<EOF > "$STAGING/etc/dhcpcd.conf"
+cat <<EOF > "$STAGE_PRIV/etc/dhcpcd.conf"
 # See dhcpcd.conf(5) for details.
 
 # Allow users of this group to interact with dhcpcd via the control socket.

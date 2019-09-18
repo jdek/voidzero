@@ -39,7 +39,9 @@ umount -R /dev/sdd
 ** ~stage.sh~
 
    The staging script runs off environment variables for Wi-Fi and USB
-   gadget networking.
+   gadget networking. It also copies your ssh .pub key into the
+   staging/priv/root/.ssh/authorized_keys file (touch or manually fill
+   this file if you want a different key).
 
 *** Wi-Fi networking
 
