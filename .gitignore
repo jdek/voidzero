@@ -1,0 +1,4 @@
+mmc
+staging/priv
+*.img
+*.xz

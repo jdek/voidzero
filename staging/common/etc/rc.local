@@ -1,6 +1,0 @@
-# This is run by runit in stage 2 before the services are executed
-# (see /etc/runit/2).
-
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
-
-id -u chrony || xbps-reconfigure -f chrony

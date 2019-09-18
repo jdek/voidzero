@@ -23,8 +23,8 @@ install -o root -g root -m 0644 $STAGE_COMMON/boot/config.txt $MMC/boot/
 # tty
 enable_sv agetty-ttyAMA0
 
-# rc.local
-install -o root -g root -m 0644 $STAGE_COMMON/etc/rc.local $MMC/etc/
+# resolv.conf for dhcpcd
+install -o root -g root -m 0644 $STAGE_COMMON/etc/resolv.conf.head $MMC/etc/
 
 # kernel modules
 install -o root -g root -m 0755 -d $MMC/etc/modules-load.d
