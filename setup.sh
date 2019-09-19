@@ -1,6 +1,7 @@
 #!/bin/sh
 
 xbps-install -Syu
+xbps-install -yu
 
 # fix rng
 xbps-query rng-tools || xbps-install -y rng-tools
