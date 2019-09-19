@@ -26,6 +26,9 @@ enable_sv agetty-ttyAMA0
 # resolv.conf for dhcpcd
 install -o root -g root -m 0644 $STAGE_COMMON/etc/resolv.conf.head $MMC/etc/
 
+# hostname
+install -o root -g root -m 0644 $STAGE_COMMON/etc/hostname $MMC/etc/
+
 # kernel modules
 install -o root -g root -m 0755 -d $MMC/etc/modules-load.d
 install -o root -g root -m 0644 $STAGE_COMMON/etc/modules-load.d/* $MMC/etc/modules-load.d/

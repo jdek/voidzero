@@ -30,15 +30,6 @@ setopt SHARE_HISTORY
 [[ -n "^[[A" ]]  && bindkey "^[[A" history-search-backward
 [[ -n "^[[B" ]]  && bindkey "^[[B" history-search-forward
 
-autoload -Uz compinit && compinit
-zstyle ':completion:*' completer _complete _ignored _correct _approximate
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
-zstyle ':completion:*' menu select=1
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' rehash true
-zstyle :compinstall filename "$HOME/.zshrc"
-
 autoload -Uz colors && colors
 PS1="%F{blue}%n%f%F{green}@%f%F{red}%m%f%F{green}:%f%F{yellow}%~%f%(?.%F{green}.%F{red})%(!.#.$)%f "
 
